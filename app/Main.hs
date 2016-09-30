@@ -5,7 +5,7 @@ import Control.Lens
 main = do
   let seedList = [0..100]
   let effector = [1..3]
-  print $ map (sum . map productTuple . zip effector) $f seedList []
+  print $ map (sum . zipWith (curry productTuple) effector) $ f seedList []
     where
       f :: [Int] -> [[Int]] -> [[Int]]
       f [] n = n
