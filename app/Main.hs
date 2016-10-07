@@ -1,8 +1,10 @@
 module Main where
 
+import DropUntil
 import Control.Lens
 
 main = do
+  DropUntil.function
   let seedList = [0..100]
   let effector = [1..3]
   print $ map (sum . zipWith (curry productTuple) effector) $ f seedList []
