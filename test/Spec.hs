@@ -17,4 +17,9 @@ main = hspec $ do
     listPrimeFactor 13195 [] `shouldBe` [5, 7, 13, 29]
   describe "problem3" $ it "" $
     problem3 `shouldBe` 6857
+  describe "palindrome" $ it "" $ do
+    palindrome (show 101) `shouldBe` True
+    palindrome (show 1001) `shouldBe` True
+  describe "problem4" $ it "" $
+    head problem4 `shouldBe` 906609
 
