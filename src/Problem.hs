@@ -13,3 +13,12 @@ problem2 = sum . filter even . takeWhile (<=4000000) $ fibs
 fib n = fibs!!n
 fibs = 1 : 2 : zipWith (+) fibs (tail fibs)
 
+problem3 :: Integer
+problem3 = maximum $ listPrimeFactor 600851475143 []
+
+listPrimeFactor :: Integer -> [Integer] -> [Integer]
+listPrimeFactor 1 ns = ns
+listPrimeFactor n ns = do
+  let x = find (\x -> n `mod` x == 0) [2..] :: Maybe Integer
+  listPrimeFactor (n `div` fromJust x) (ns ++ maybeToList x)
+
