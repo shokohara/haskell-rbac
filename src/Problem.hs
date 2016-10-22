@@ -35,3 +35,8 @@ palindrome x = x == reverse x
 problem5 :: Integer -> Integer
 problem5 x = head [s | s <- [1..], all (\v -> s `mod` v == 0) (reverse [1..x])]
 
+problem6 :: Integer -> Integer
+problem6 x = (square . sum $ [1..x]) - sum (map square [1..x])
+
+square x = x * x
+

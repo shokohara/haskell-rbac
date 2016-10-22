@@ -24,4 +24,6 @@ main = hspec $ do
     head problem4 `shouldBe` 906609
   describe "problem5" $ it "" $
     problem5 10 `shouldBe` 2520
+  describe "problem6" $ it "" $
+    problem6 10 `shouldBe` 3025 - 385
 
