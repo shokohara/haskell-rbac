@@ -58,3 +58,9 @@ stringToListInt x = map digitToInt $ x
 
 problem10 x = sum . filter isPrime $ [2..x-1]
 
+stringToInt :: String -> Int
+stringToInt x = read x :: Int
+
+problem13 :: [Integer] -> Int
+problem13 x = stringToInt . take 10 . show . sum $ x
+
