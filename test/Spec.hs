@@ -22,4 +22,6 @@ main = hspec $ do
     palindrome (show 1001) `shouldBe` True
   describe "problem4" $ it "" $
     head problem4 `shouldBe` 906609
+  describe "problem5" $ it "" $
+    problem5 10 `shouldBe` 2520
 
