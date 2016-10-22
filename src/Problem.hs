@@ -2,6 +2,7 @@ module Problem where
 
 import Data.List (sort, sortBy, find)
 import Data.Maybe (fromJust, maybeToList)
+import Data.Char (digitToInt)
 
 problem1 = p1 1000
 
@@ -45,4 +46,13 @@ problem7 x = last . take x . filter isPrime $ [2..]
 
 isPrime :: Integer -> Bool
 isPrime x = all (\n -> 0 /= x `mod` n) [2..x-1]
+
+problem8 :: String -> Int -> Int
+problem8 xs i = maximum . map product . listSeries [] i . stringToListInt $ xs
+
+listSeries :: [[Int]] -> Int -> [Int] -> [[Int]]
+listSeries r i xs = if length xs < i then r else listSeries (r ++ [take i xs]) i (drop 1 xs)
+
+stringToListInt :: String -> [Int]
+stringToListInt x = map digitToInt $ x
 
