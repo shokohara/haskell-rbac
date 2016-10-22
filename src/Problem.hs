@@ -56,3 +56,5 @@ listSeries r i xs = if length xs < i then r else listSeries (r ++ [take i xs]) i
 stringToListInt :: String -> [Int]
 stringToListInt x = map digitToInt $ x
 
+problem10 x = sum . filter isPrime $ [2..x-1]
+
