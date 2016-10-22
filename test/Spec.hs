@@ -26,4 +26,9 @@ main = hspec $ do
     problem5 10 `shouldBe` 2520
   describe "problem6" $ it "" $
     problem6 10 `shouldBe` 3025 - 385
+  describe "isPrime" $ it "" $
+    map isPrime [7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47] `shouldBe` map (\n -> True) [7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+  describe "problem7" $ do
+    it "premise" $ problem7 6 `shouldBe` 13
+    --it "answer" $ problem7 10001 `shouldBe` 104743
 

@@ -40,3 +40,9 @@ problem6 x = (square . sum $ [1..x]) - sum (map square [1..x])
 
 square x = x * x
 
+problem7 :: Int -> Integer
+problem7 x = last . take x . filter isPrime $ [2..]
+
+isPrime :: Integer -> Bool
+isPrime x = all (\n -> 0 /= x `mod` n) [2..x-1]
+
