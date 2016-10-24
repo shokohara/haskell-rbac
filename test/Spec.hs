@@ -46,6 +46,9 @@ main = hspec $ do
 --    it "" $ problem10 2000000 `shouldBe` 142913828922
   describe "problem13" $ do
     it "" $ problem13 p13 `shouldBe` 5537376230
+  describe "problem16" $ do
+    it "premise" $ problem16 15 `shouldBe` 26
+    it "problem" $ problem16 1000 `shouldBe` 1366
 
 p13 = [37107287533902102798797998220837590246510135740250 :: Integer
       ,46376937677490009712648124896970078050417018260538 :: Integer

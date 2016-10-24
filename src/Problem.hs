@@ -64,3 +64,5 @@ stringToInt x = read x :: Int
 problem13 :: [Integer] -> Int
 problem13 x = stringToInt . take 10 . show . sum $ x
 
+problem16 x = sum . stringToListInt . show $ 2 ^ x
+
