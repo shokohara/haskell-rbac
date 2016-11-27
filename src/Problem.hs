@@ -3,6 +3,8 @@ module Problem where
 import Data.List (sort, sortBy, find)
 import Data.Maybe (fromJust, maybeToList)
 import Data.Char (digitToInt)
+import Data.Matrix (fromLists, toLists, transpose)
+import qualified Data.Map as Map
 
 problem1 = p1 1000
 
@@ -58,11 +60,60 @@ stringToListInt x = map digitToInt $ x
 
 problem10 x = sum . filter isPrime $ [2..x-1]
 
+problem11InputParse :: String -> [[Int]]
+problem11InputParse = map (map stringToInt . words) . lines
+
+problem11 :: [[Int]] -> [[Int]]
+problem11 x = (concatMap (listSeries [] 4) $ toLists . transpose . fromLists $ x) ++ (concatMap (listSeries [] 4) $ x)
+
 stringToInt :: String -> Int
 stringToInt x = read x :: Int
 
 problem13 :: [Integer] -> Int
 problem13 x = stringToInt . take 10 . show . sum $ x
 
-problem16 x = sum . stringToListInt . show $ 2 ^ x
+problem14 :: Int -> Int
+problem14 x = maximum . map length . map (collatzSequence []) $ [1..x-1]
 
+collatzSequence :: [Int] -> Int -> [Int]
+collatzSequence r 1 = r
+collatzSequence [] n = collatzSequence [n] n
+collatzSequence r n = collatzSequence (r ++ [if even n then n `div` 2 else 3 * n + 1]) (if even n then n `div` 2 else 3 * n + 1)
+
+-- 0countGrid x = p
+
+--problem16 x = sum . stringToListInt . show $ 2 ^ x
+
+--problem17 x = length . filter (/= '-') . filter (/= ' ') . concatMap numberToWords $ [1..x]
+
+--numberToWords x =
+--  Map.lookup x . Map.fromList [(1, "one")
+--                              ,(2, "two")
+--                              ,(3, "three")
+--                              ,(4, "four")
+--                              ,(5, "five")
+--                              ,(6, "six")
+--                              ,(7, "seven")
+--                              ,(8, "eight")
+--                              ,(9, "nine")
+--                              ,(10, "ten")
+--                              ,(11, "eleven")
+--                              ,(12, "twelve")
+--                              ,(13, "thirteen")
+--                              ,(14, "fourteen")
+--                              ,(15, "fifteen")
+--                              ,(16, "sixteen")
+--                              ,(17, "seventeen")
+--                              ,(18, "eighteen")
+--                              ,(19, "nineteen")
+--                              ,(20, "twenty")
+--                              ,(30, "thirty")
+--                              ,(40, "forty")
+--                              ,(50, "fifty")
+--                              ,(60, "sixty")
+--                              ,(70, "seventy")
+--                              ,(80, "eighty")
+--                              ,(90, "ninety")
+--                              ,(100, "one hundred")
+--                              ,(1000, "one thousand")]
+--
