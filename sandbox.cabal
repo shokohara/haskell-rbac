@@ -19,12 +19,14 @@ library
                      , Sandbox
                      , DropUntil
                      , Problem
+                     , Bokunonumachi
   build-depends:       base >= 4.7 && < 5
                      , yjtools
                      , matrix
                      , permutation
                      , containers
                      , MissingH
+                     , singletons
   default-language:    Haskell2010
 
 executable sandbox-exe
