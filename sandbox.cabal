@@ -20,6 +20,7 @@ library
                      , DropUntil
                      , Problem
                      , Bokunonumachi
+                     , LYGHWriter
   build-depends:       base >= 4.7 && < 5
                      , yjtools
                      , matrix
@@ -27,6 +28,7 @@ library
                      , containers
                      , MissingH
                      , singletons
+                     , mtl
   default-language:    Haskell2010
 
 executable sandbox-exe
