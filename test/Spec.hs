@@ -48,9 +48,9 @@ main = hspec $ do
   describe "problem10" $ do
     it "" $ problem10 10 `shouldBe` 17
 --    it "" $ problem10 2000000 `shouldBe` 142913828922
-  describe "problem11" $ do
-    it "" $ (problem11InputParse . B.unpack $ $(embedFile "src/problem11.txt")) `shouldBe` p11
-    it "" $ (problem11 . problem11InputParse . B.unpack $ $(embedFile "src/problem11.txt")) `shouldBe` [[]]
+--  describe "problem11" $ do
+--    it "" $ (problem11InputParse . B.unpack $ $(embedFile "src/problem11.txt")) `shouldBe` p11
+--    it "" $ (problem11 . problem11InputParse . B.unpack $ $(embedFile "src/problem11.txt")) `shouldBe` [[]]
   describe "problem13" $ do
     it "" $ problem13 p13 `shouldBe` 5537376230
 --  describe "problem16" $ do

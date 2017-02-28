@@ -1,6 +1,9 @@
 module LYGHWriter where
 
 import Control.Monad.Writer
+import Data.Tree
+import Text.Read
+import Data.Maybe
 
 logNumber :: Int -> Writer [String] Int
 logNumber x = writer (x, ["Got number: " ++ show x])
@@ -79,4 +82,14 @@ finalCountDown 0 = do
 finalCountDown x = do
   finalCountDown (x-1)
   tell [show x]
+
+input = "50\n10\n30\n5\n90\n20\n40\n2\n25\n10\n8\n0"
+
+loads :: String -> [Int]
+loads = catMaybes . fmap readMaybe . lines
+
+structuredLoad :: [Int] -> [[Int]]
+structuredLoad xs = [take 2 xs] ++ [take 1 . drop 2 $ xs] ++ [take 2 . drop 3 $ xs] ++ [take 1 . drop 5 $ xs] ++ [take 2 . drop 6 $ xs] ++ [take 1 . drop 8 $ xs] ++ [take 2 . drop 9 $ xs] ++ [take 1 . drop 11 $ xs]
+
+x = unfoldTree (\x -> (x, [])) 1
 
