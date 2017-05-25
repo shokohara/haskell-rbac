@@ -1,6 +1,10 @@
 resolver: lts-8.15
 packages:
 - '.'
+- location:
+    git: git@github.com:shokohara/persistent-relational-record.git
+    commit: ff02785d1ba6f9c926901eb89340f315decc1702
+  extra-dep: true
 extra-deps: []
 flags: {}
 extra-package-dbs: []
