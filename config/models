@@ -1,0 +1,34 @@
+User
+  name Text
+  password Text
+  UniqueUser name
+  deriving Eq Read Show
+
+Subject json
+  name Text
+  UniqueSubjectName name
+  deriving Eq Read Show
+
+Role
+  name Text
+  deriving Eq Read Show
+
+Permission
+  name Text
+  deriving Eq Read Show
+
+Operation
+  name Text
+  deriving Eq Read Show
+
+RoleSubject
+  role RoleId
+  subject SubjectId
+
+PermissionRole
+  permission PermissionId
+  role RoleId
+
+OperationPermission
+  operation OperationId
+  permission PermissionId
