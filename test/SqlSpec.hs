@@ -14,6 +14,7 @@ main = hspec spec
 
 spec = describe "sql" $ do
   it "" $ do
+    "" `shouldBe` ""
 --    (show hello) `shouldBe` ""
 --    (show selectAccount) `shouldBe` ""
-    (show account1) `shouldBe` ""
+--    (show account1) `shouldBe` ""

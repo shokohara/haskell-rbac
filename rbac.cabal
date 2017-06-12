@@ -46,7 +46,8 @@ library
                      , relational-query
                      , persistent-relational-record
                      , persistable-record
-                     , time
+                     , time == 1.6.0.1
+                     , servant-mock
                      , HDBC
   default-language:    Haskell2010
 

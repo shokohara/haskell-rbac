@@ -33,3 +33,6 @@ spec = with (makeTestApp ":memory:") $ do
       post "/api/authority" "" `shouldRespondWith` 415
       post "/api/authority" "{}" `shouldRespondWith` 415
       post "/api/authority" [json|{}|] `shouldRespondWith` 415
+    it "responds with 201" $ do
+      post "/api/users" [json|{"name": "firstUserName"}|] `shouldRespondWith` 201
+

@@ -26,6 +26,8 @@ import Network.Wai
 import Network.Wai.Handler.Warp
 import Prelude hiding (concat)
 import Servant
+import Data.Time.Clock
+import qualified CreateUserRequest as C
 
 --import Action
 import Permission
@@ -77,8 +79,14 @@ instance ToJSON PermissionRequest where
   toJSON = genericToJSON defaultOptions { fieldLabelModifier = snakeCase }
 instance ToJSON AuthorizeRequest where
   toJSON = genericToJSON defaultOptions { fieldLabelModifier = snakeCase }
+instance FromJSON C.CreateUserRequest where
+  parseJSON = genericParseJSON defaultOptions { fieldLabelModifier = snakeCase }
+instance ToJSON C.CreateUserRequest where
+  toJSON = genericToJSON defaultOptions { fieldLabelModifier = snakeCase }
 
 type API = "api" :> "authority" :> ReqBody '[JSON] AuthorizeRequest :> Post '[JSON] ()
+  :<|> "api" :> "users" :> ReqBody '[JSON] C.CreateUserRequest :> Post '[JSON] ()
+  :<|> "api" :> "users" :> ReqBody '[JSON] C.CreateUserRequest :> Get '[JSON] ()
 
 --selectImageByTagNameList
 --    :: Bool -- ^ match any
@@ -93,8 +101,37 @@ type API = "api" :> "authority" :> ReqBody '[JSON] AuthorizeRequest :> Post '[JS
 authorizeH :: AuthorizeRequest -> ExceptT ServantErr IO ()
 authorizeH a = unless (1 == subjectId a && all (\f -> (==) "*" . concat . fmap f . permissions $ a) [resource, operation]) $ throwError err403
 
-server :: ConnectionPool -> Server API
-server pool = authorizeH
+user1 :: C.CreateUserRequest -> Relation () Subject
+user1 a = relation $ do
+  s <- query subject
+  wheres $ s ! Subject.name' .=. value (C.name a)
+  return s
+
+--createUserH :: ConnectionPool -> C.CreateUserRequest -> ExceptT ServantErr IO ()
+--createUserH pool a = liftIO $ flip runSqlPersistMPool pool $ do
+--  exists <- user1 a
+--  case exists of
+--    Just _ -> return Nothing
+--    _ -> Just <$> derivedInsertValue $ do
+--      Subject.name' <-# value C.name a
+--      Subject.createdAt' <-# value getCurrentTime
+--      Subject.updatedAt' <-# value getCurrentTime
+--      Subject.deletedAt' <-# value getCurrentTime
+
+--createUserH :: ConnectionPool -> C.CreateUserRequest -> Handler ()
+--createUserH pool a = (\now -> ()) <$> getCurrentTime
+--createUserH pool a = return ()
+
+insertUser :: C.CreateUserRequest -> UTCTime -> Insert ()
+insertUser a now = derivedInsertValue $ do
+    Subject.name' <-# value (C.name a)
+    Subject.createdAt' <-# value now
+    Subject.updatedAt' <-# value now
+    Subject.deletedAt' <-# value Nothing
+    return unitPlaceHolder
+
+--server :: ConnectionPool -> Server API
+--server pool = authorizeH :<|> createUserH pool
 --  authorizeH where
 --  authorizeH ar = liftIO $ authorize ar
 --  authorize :: AuthorizeRequest -> IO ()
