@@ -1,6 +1,6 @@
 name:                authority
 version:             0.1.0.0
-homepage:            https://github.com/SHOWROOM-inc/shoproom/ope-authority/README.md
+homepage:            https://github.com/shokohara/haskell-rbac/README.md
 license:             BSD3
 license-file:        LICENSE
 author:              Author name here
@@ -66,5 +66,5 @@ test-suite authority-test
 
 source-repository head
   type:     git
-  location: https://github.com/SHOWROOM-inc/shoproom
+  location: https://github.com/shokohara/haskell-rbac
 
